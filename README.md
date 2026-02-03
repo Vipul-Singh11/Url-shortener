@@ -164,7 +164,8 @@ Example response:
 - Real-time analytics display
 - Copy button with feedback
   
-<img width="500" height="600" alt="Screenshot 2026-02-03 131508" src="https://github.com/user-attachments/assets/e9ddb947-178f-45a0-9978-c7c429a7c451" /> <img width="500" height="600" alt="Screenshot 2026-02-03 132415" src="https://github.com/user-attachments/assets/dfc307f8-942e-4e65-a061-1bce6039deac" />
+<img width="500" height="600" alt="Screenshot 2026-02-03 131508" src="https://github.com/user-attachments/assets/e9ddb947-178f-45a0-9978-c7c429a7c451" />
+<img width="500" height="600" alt="Screenshot 2026-02-03 132415" src="https://github.com/user-attachments/assets/dfc307f8-942e-4e65-a061-1bce6039deac" />
 
 (See screenshots above)
 
