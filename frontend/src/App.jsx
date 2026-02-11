@@ -62,7 +62,10 @@ function App() {
   const formatDate = (dateString) => {
     if (!dateString) return "—";
   
-    return new Date(dateString).toLocaleString("en-IN", {
+    // Treat backend LocalDateTime as UTC
+    const utcDate = new Date(dateString + "Z");
+  
+    return utcDate.toLocaleString("en-IN", {
       timeZone: "Asia/Kolkata",
       year: "numeric",
       month: "short",
@@ -70,6 +73,7 @@ function App() {
       hour: "2-digit",
       minute: "2-digit",
       second: "2-digit",
+      hour12: true,
     });
   };
 
