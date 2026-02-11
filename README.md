@@ -47,6 +47,7 @@ The application allows users to shorten long URLs and view real-time analytics s
 
 ## 📂 Project Structure
 
+```text
 url-shortener/
 │
 ├── backend/                  # Spring Boot backend
@@ -73,8 +74,7 @@ url-shortener/
 │   └── vite.config.js
 │
 └── README.md
-
----
+```
 
 ## 🚀 How to Run the Project Locally
 
