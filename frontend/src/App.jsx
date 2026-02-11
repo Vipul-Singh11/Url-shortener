@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "./App.css";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 function App() {
   const [longUrl, setLongUrl] = useState("");
   const [result, setResult] = useState(null);
@@ -11,15 +13,15 @@ function App() {
   const fetchStats = async (shortCode) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/stats/${shortCode}`
+        `${API_BASE_URL}/api/stats/${shortCode}`
       );
 
       if (!response.ok) return;
 
       const data = await response.json();
       setStats(data);
-    } catch {
-      console.error("Failed to fetch analytics");
+    } catch (err) {
+      console.error("Failed to fetch analytics", err);
     }
   };
 
@@ -30,12 +32,12 @@ function App() {
     setCopied(false);
 
     try {
-      const response = await fetch("http://localhost:8080/api/shorten", {
+      const response = await fetch(`${API_BASE_URL}/api/shorten`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ longUrl })
+        body: JSON.stringify({ longUrl }),
       });
 
       if (!response.ok) {
@@ -47,7 +49,7 @@ function App() {
       const data = await response.json();
       setResult(data);
       fetchStats(data.shortCode);
-    } catch {
+    } catch (err) {
       setError("Backend not reachable");
     }
   };
@@ -100,7 +102,8 @@ function App() {
                 <strong>Created At:</strong> {formatDate(stats.createdAt)}
               </p>
               <p>
-                <strong>Last Accessed:</strong> {formatDate(stats.lastAccessedAt)}
+                <strong>Last Accessed:</strong>{" "}
+                {formatDate(stats.lastAccessedAt)}
               </p>
             </div>
           )}
@@ -109,4 +112,5 @@ function App() {
     </div>
   );
 }
+
 export default App;
