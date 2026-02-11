@@ -26,10 +26,13 @@ public class ShortUrlController {
                 request.getExpiresAt()
         );
 
+        String fullShortUrl =
+                shortUrlService.buildShortUrl(shortUrl.getShortCode());
+
         return ResponseEntity.status(201)
                 .body(new ShortUrlResponse(
                         shortUrl.getShortCode(),
-                        "http://localhost:8080/r/" + shortUrl.getShortCode()
+                        fullShortUrl
                 ));
     }
 }
