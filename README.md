@@ -46,35 +46,32 @@ The application allows users to shorten long URLs and view real-time analytics s
 ---
 
 ## 📂 Project Structure
-
 url-shortener/
 │
-├── backend/ # Spring Boot backend
-│ ├── src/main/java/com/example/url_shortener
-│ │ ├── controller
-│ │ ├── service
-│ │ ├── repository
-│ │ ├── entity
-│ │ ├── dto
-│ │ ├── exception
-│ │ └── config
-│ ├── src/main/resources
-│ │ └── application.properties
-│ ├── pom.xml
-│ └── mvnw / mvnw.cmd
+├── backend/                  # Spring Boot backend
+│   ├── src/main/java/com/example/url_shortener
+│   │   ├── controller
+│   │   ├── service
+│   │   ├── repository
+│   │   ├── entity
+│   │   ├── dto
+│   │   ├── exception
+│   │   └── config
+│   ├── src/main/resources
+│   │   └── application.properties
+│   ├── pom.xml
+│   └── mvnw / mvnw.cmd
 │
-├── frontend/ # React frontend (Vite)
-│ ├── src
-│ │ ├── App.jsx
-│ │ ├── App.css
-│ │ └── main.jsx
-│ ├── index.html
-│ ├── package.json
-│ └── vite.config.js
+├── frontend/                 # React frontend (Vite)
+│   ├── src
+│   │   ├── App.jsx
+│   │   ├── App.css
+│   │   └── main.jsx
+│   ├── index.html
+│   ├── package.json
+│   └── vite.config.js
 │
 └── README.md
-
-
 ---
 
 ## 🚀 How to Run the Project Locally
