@@ -2,6 +2,7 @@ package com.example.url_shortener.service;
 
 import com.example.url_shortener.entity.ShortUrl;
 import com.example.url_shortener.repository.ShortUrlRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
@@ -16,6 +17,9 @@ public class ShortUrlService {
 
     private final ShortUrlRepository shortUrlRepository;
     private final SecureRandom random = new SecureRandom();
+
+    @Value("${app.base-url}")
+    private String baseUrl;
 
     public ShortUrlService(ShortUrlRepository shortUrlRepository) {
         this.shortUrlRepository = shortUrlRepository;
@@ -47,6 +51,10 @@ public class ShortUrlService {
         shortUrl.setClickCount(shortUrl.getClickCount() + 1);
         shortUrl.setLastAccessedAt(LocalDateTime.now());
         shortUrlRepository.save(shortUrl);
+    }
+
+    public String buildShortUrl(String shortCode) {
+        return baseUrl + "/" + shortCode;
     }
 
     private String generateUniqueShortCode() {
