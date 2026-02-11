@@ -5,6 +5,13 @@ The application allows users to shorten long URLs and view real-time analytics s
 
 ---
 
+## 🌐 Live Demo
+
+- **Frontend:** https://url-shortener-eight-ruddy.vercel.app/
+- **Backend:** https://url-shortener-backend-6u50.onrender.com
+
+---
+
 ## ✨ Features
 
 - 🔗 Shorten long URLs into compact, shareable links
@@ -17,6 +24,7 @@ The application allows users to shorten long URLs and view real-time analytics s
 - 📋 One-click copy to clipboard
 - 🎨 Clean, responsive, single-page UI
 - ⚠️ Backend validation & global exception handling
+- 🌍 Timezone-safe timestamp display (UTC → local)
 
 ---
 
@@ -27,7 +35,7 @@ The application allows users to shorten long URLs and view real-time analytics s
 - Spring Boot
 - Spring Data JPA
 - Hibernate
-- MySQL
+- PostgreSQL (Supabase)
 - Maven
 
 ### Frontend
@@ -39,121 +47,141 @@ The application allows users to shorten long URLs and view real-time analytics s
 
 ## 📂 Project Structure
 
-```
 url-shortener/
 │
-├── backend/                  # Spring Boot backend
-│   ├── src/main/java/com/example/url_shortener
-│   │   ├── controller
-│   │   ├── service
-│   │   ├── repository
-│   │   ├── entity
-│   │   ├── dto
-│   │   ├── exception
-│   │   └── config
-│   ├── src/main/resources
-│   │   └── application.properties
-│   ├── pom.xml
-│   └── mvnw / mvnw.cmd
+├── backend/ # Spring Boot backend
+│ ├── src/main/java/com/example/url_shortener
+│ │ ├── controller
+│ │ ├── service
+│ │ ├── repository
+│ │ ├── entity
+│ │ ├── dto
+│ │ ├── exception
+│ │ └── config
+│ ├── src/main/resources
+│ │ └── application.properties
+│ ├── pom.xml
+│ └── mvnw / mvnw.cmd
 │
-├── frontend/                 # React frontend (Vite)
-│   ├── src
-│   │   ├── App.jsx
-│   │   ├── App.css
-│   │   └── main.jsx
-│   ├── index.html
-│   ├── package.json
-│   └── vite.config.js
+├── frontend/ # React frontend (Vite)
+│ ├── src
+│ │ ├── App.jsx
+│ │ ├── App.css
+│ │ └── main.jsx
+│ ├── index.html
+│ ├── package.json
+│ └── vite.config.js
 │
 └── README.md
-```
+
 
 ---
 
 ## 🚀 How to Run the Project Locally
 
-### 1️⃣ Backend Setup
+### Backend Setup
 
-- Make sure **MySQL** is running
-- Create a database (example):
-  ```
-  url_shortener_db
-  ```
+#### Prerequisites
+- Java 21
+- Maven
+- PostgreSQL running locally
 
-- Update `application.properties` if needed:
-  ```
-  spring.datasource.url=jdbc:mysql://localhost:3306/url_shortener_db
-  spring.datasource.username=YOUR_USERNAME
-  spring.datasource.password=YOUR_PASSWORD
-  ```
+Verify installation:
+java -version
+mvn -version
 
-- Run the backend:
-  ```
-  cd backend
-  mvn spring-boot:run
-  ```
-
-Backend runs at:
-```
-http://localhost:8080
-```
 
 ---
 
-### 2️⃣ Frontend Setup
+#### 1. Create Database
 
-```
+Create a PostgreSQL database:
+url_shortener_db
+
+
+---
+
+#### 2. Configure application.properties
+
+Edit:
+backend/src/main/resources/application.properties
+
+
+Add:
+spring.datasource.url=jdbc:postgresql://localhost:5432/url_shortener_db
+spring.datasource.username=YOUR_USERNAME
+spring.datasource.password=YOUR_PASSWORD
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+
+
+---
+
+#### 3. Run Backend
+
+cd backend
+mvn spring-boot:run
+
+
+Backend runs at:
+http://localhost:8080
+
+
+---
+
+### Frontend Setup
+
 cd frontend
 npm install
 npm run dev
-```
+
 
 Frontend runs at:
-```
 http://localhost:5173
-```
+
+
+Create a `.env` file in `frontend/`:
+VITE_API_BASE_URL=http://localhost:8080
+
 
 ---
 
 ## 🔁 API Endpoints
 
 ### Shorten URL
-```
 POST /api/shorten
-```
+
 
 Request body:
-```
 {
-  "longUrl": "https://example.com"
+"longUrl": "https://example.com"
 }
-```
+
 
 ---
 
 ### Redirect
-```
 GET /r/{shortCode}
-```
+
 
 ---
 
 ### Get Analytics
-```
 GET /api/stats/{shortCode}
-```
+
 
 Example response:
-```
 {
-  "shortCode": "AGVOLVG",
-  "longUrl": "https://example.com",
-  "clickCount": 5,
-  "createdAt": "2026-02-02T01:18:57",
-  "lastAccessedAt": "2026-02-02T13:09:18",
-  "expiresAt": null
+"shortCode": "AGVOLVG",
+"longUrl": "https://example.com",
+"clickCount": 5,
+"createdAt": "2026-02-02T01:18:57",
+"lastAccessedAt": "2026-02-02T13:09:18",
+"expiresAt": null
 }
-```
+
 
 ---
 
@@ -163,27 +191,27 @@ Example response:
 - Gradient background
 - Real-time analytics display
 - Copy button with feedback
-  
-<img width="500" height="600" alt="Screenshot 2026-02-03 131508" src="https://github.com/user-attachments/assets/e9ddb947-178f-45a0-9978-c7c429a7c451" />
-<img width="500" height="550" alt="Screenshot 2026-02-03 132415" src="https://github.com/user-attachments/assets/dfc307f8-942e-4e65-a061-1bce6039deac" />
 
-(See screenshots above)
+<img width="1200" height="800" alt="url-shortener" src="https://github.com/user-attachments/assets/83431d29-07a0-4da8-8c53-e8a21c033fe1" />
+
 
 ---
 
 ## 📌 Notes
 
-- Backend and frontend are kept **in the same repository** for easy development
-- `target/` is ignored via `.gitignore`
-- `.vscode`, `.mvn`, and wrapper files are intentionally committed for consistency
+- Backend and frontend are maintained in the same repository
+- Environment variables are used for production configuration
+- Backend is deployed on Render
+- Frontend is deployed on Vercel
+- Database is hosted on Supabase (PostgreSQL)
 
 ---
 
 ## 🧑‍💻 Author
 
-**Vipul Singh**
+Vipul Singh
 
-Built as a learning-focused full-stack project showcasing backend + frontend integration.
+Built as a learning-focused full-stack project showcasing backend + frontend integration, cloud deployment, and production debugging.
 
 ---
 
